@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">RestClientDemo</string>
+    <string name="app_name">AndroidHaxx</string>
+    <string name="url">http://www.findmyapp.net/</string>
+    <string name="parameters">findmyapp/echo</string>
+    <string name="choseDataFormat">Velg dataformat</string>
+    <string-array name="expectedDataFormat">
+        <item>json</item>
+        <item>xml</item>
+    </string-array>
+    <string name="chooseAction">Velg handling</string>
+    <string-array name="action">
+        <item>GET</item>
+        <item>PUT</item>
+        <item>POST</item>
+        <item>DELETE</item>
+    </string-array>
+</resources>
