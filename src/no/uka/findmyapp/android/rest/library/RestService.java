@@ -1,7 +1,7 @@
 package no.uka.findmyapp.android.rest.library;
 
+import no.uka.findmyapp.android.rest.R;
 import no.uka.findmyapp.android.rest.demo.AndroidRestClientDemoActivity;
-import no.uka.findmyapp.android.rest.demo.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;

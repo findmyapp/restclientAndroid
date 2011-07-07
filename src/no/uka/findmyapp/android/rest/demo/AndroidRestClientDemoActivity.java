@@ -1,5 +1,6 @@
 package no.uka.findmyapp.android.rest.demo;
 
+import no.uka.findmyapp.android.rest.R;
 import no.uka.findmyapp.android.rest.library.RestMethod;
 import no.uka.findmyapp.android.rest.library.RestService;
 import no.uka.findmyapp.android.rest.library.RestServiceHelper;

@@ -3,6 +3,7 @@ package no.uka.findmyapp.android.rest.library;
 import no.uka.findmyapp.android.rest.demo.AndroidRestClientDemoActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.app.IntentService;
 
 /**
  * The rest service helper class, a singleton 

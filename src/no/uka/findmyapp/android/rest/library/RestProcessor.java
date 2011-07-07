@@ -1,7 +1,5 @@
 package no.uka.findmyapp.android.rest.library;
 
-import no.uka.findmyapp.android.rest.model.BaseModel;
-
 /**
  * 
  */
