@@ -1,7 +1,7 @@
 package no.uka.findmyapp.android.rest.library;
 
+import no.uka.findmyapp.android.rest.R;
 import no.uka.findmyapp.android.rest.demo.AndroidRestClientDemoActivity;
-import no.uka.findmyapp.android.rest.demo.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -55,6 +55,7 @@ public class RestService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+    	super.onStartCommand(intent, flags, startId);
         Log.i("LocalService", "Received start id " + startId + ": " + intent);
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.

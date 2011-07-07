@@ -94,16 +94,16 @@ public class RestMethod {
 		this.url = url;
 	}
 
-	public String get(String parameters, String expectedDataFormat) throws Exception {
+	public String get(String parameters, ServiceDataFormat serviceDataFormat) throws Exception {
 		String requestUrl = this.url + parameters; 
 		HttpGet request = new HttpGet(requestUrl);
 		
-		return this.execute(setRequestHeaders(expectedDataFormat, request));
+		return this.execute(setRequestHeaders(serviceDataFormat.getValue(), request));
 	}
 	
 	private HttpRequestBase setRequestHeaders(String expectedDataFormat, HttpRequestBase request) {
-		request.setHeader("Accept", "application/" + expectedDataFormat);
-		request.setHeader("Content-type", "application/" + expectedDataFormat);
+		request.setHeader("Accept", expectedDataFormat);
+		request.setHeader("Content-type", expectedDataFormat);
 		request.setHeader("User-Agent", this.useragent);
 		
 		return request; 
