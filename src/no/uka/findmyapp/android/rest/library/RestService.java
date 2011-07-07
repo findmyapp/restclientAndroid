@@ -1,7 +1,7 @@
 package no.uka.findmyapp.android.rest.library;
 
 import no.uka.findmyapp.android.rest.demo.AndroidRestClientDemoActivity;
-import no.uka.findmyapp.android.rest.demo.R;
+import no.uka.findmyapp.android.rest.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -45,10 +45,12 @@ public class RestService extends Service {
 
     @Override
     public void onCreate() {
-        mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+    	super.onCreate();
+        //mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
         // Display a notification about us starting.  We put an icon in the status bar.
-        showNotification();
+        //showNotification();
+    	Log.v("Debug:","Service started");
     }
 
     @Override
@@ -61,6 +63,8 @@ public class RestService extends Service {
 
     @Override
     public void onDestroy() {
+
+    	super.onDestroy();
         // Cancel the persistent notification.
         mNM.cancel(NOTIFICATION);
 
@@ -82,7 +86,7 @@ public class RestService extends Service {
      */
     private void showNotification() {
         CharSequence text = getText(R.string.rest_service_started);
-        Notification notification = new Notification(R.drawable.icon, text, System.currentTimeMillis());        
+        Notification notification = new Notification(R.drawable.icon, text, System.currentTimeMillis());   
 
         // Send the notification.
         mNM.notify(NOTIFICATION, notification);

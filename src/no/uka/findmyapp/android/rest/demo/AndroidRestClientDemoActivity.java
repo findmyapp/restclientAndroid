@@ -1,9 +1,11 @@
 package no.uka.findmyapp.android.rest.demo;
 
+import no.uka.findmyapp.android.rest.R;
 import no.uka.findmyapp.android.rest.library.RestMethod;
+import no.uka.findmyapp.android.rest.library.RestService;
 import no.uka.findmyapp.android.rest.library.RestServiceHelper;
-import no.uka.findmyapp.android.rest.library.Servicesss;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,7 +64,7 @@ public class AndroidRestClientDemoActivity extends Activity implements OnClickLi
     	
         RestMethod rm = new RestMethod(url);
         
-        String info = "URL: " + url + "\nParamters: " + parameters + "\nDataFormat: " + expectedDataType + "\nRequestMethod: " + requestMethod + "\n\n"; 
+        String info = "URL: " + url + parameters + "\nDataFormat: " + expectedDataType + "\nRequestMethod: " + requestMethod + "\n\n"; 
         TextView tv = (TextView) findViewById(R.id.textview);
         
         try {
@@ -78,7 +80,7 @@ public class AndroidRestClientDemoActivity extends Activity implements OnClickLi
     }
     
     private void initializeService() {
-    	serviceHelper.startServiceTest(); 
+    	serviceHelper.startServiceTest(this); 
     }
     
     public class MyOnItemSelectedListener implements OnItemSelectedListener {

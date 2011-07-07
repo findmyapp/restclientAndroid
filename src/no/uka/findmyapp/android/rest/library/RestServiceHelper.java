@@ -1,5 +1,9 @@
 package no.uka.findmyapp.android.rest.library;
 
+import no.uka.findmyapp.android.rest.demo.AndroidRestClientDemoActivity;
+import android.content.Context;
+import android.content.Intent;
+
 /**
  * The rest service helper class, a singleton 
  * which exposes a simple asynchronous
@@ -23,6 +27,8 @@ public class RestServiceHelper {
 	 * The singleton RestServiceHelper instance
 	 */
 	private static RestServiceHelper INSTANCE; 
+
+	
 	
 	private RestServiceHelper() {
 	}
@@ -35,7 +41,7 @@ public class RestServiceHelper {
 		return INSTANCE;
 	}
 	
-	public void startServiceTest() {
-		RestService rs = new RestService();
+	public void startServiceTest(Context context) {
+		context.startService(new Intent(context, RestService.class));
 	}
 }
