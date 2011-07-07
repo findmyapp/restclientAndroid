@@ -1,9 +1,15 @@
 package no.uka.findmyapp.android.rest.demo;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import no.uka.findmyapp.android.rest.R;
+import no.uka.findmyapp.android.rest.library.HttpType;
 import no.uka.findmyapp.android.rest.library.RestMethod;
 import no.uka.findmyapp.android.rest.library.RestService;
 import no.uka.findmyapp.android.rest.library.RestServiceHelper;
+import no.uka.findmyapp.android.rest.library.ServiceReferenceFactory;
+import no.uka.findmyapp.android.rest.library.ServicesConstants;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -68,7 +74,7 @@ public class AndroidRestClientDemoActivity extends Activity implements OnClickLi
     }
     
     private void initializeService() {
-    	serviceHelper.startServiceTest(this); 
+    	serviceHelper.startServiceTest(this, ServiceReferenceFactory.getService(ServiceReferenceFactory.Services.TEMP)); 
     }
     
     public class MyOnItemSelectedListener implements OnItemSelectedListener {

@@ -5,9 +5,11 @@ import java.net.URISyntaxException;
 import java.util.Date;
 
 import no.uka.findmyapp.android.rest.R;
+import no.uka.findmyapp.android.rest.model.ServiceModel;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,29 +25,21 @@ public class SimpleIntentService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		// TODO Auto-generated method stub
     	Log.v("Debug","HandleIntent");
-
         Log.v(TAG, "" + new Date() + ", In onHandleIntent for thread id = " + Thread.currentThread().getId());
 
-        try {
-        	Log.v("INFO", "STARTING: ");
-        	
-            URI uri = new URI(String.format(ServicesConstants.SERVICE1_URI, "1"));
-            Log.v("INFO", "URI: " + uri);
-            
-            ServiceRequestWrapper srw = new ServiceRequestWrapper();
-            srw.setHttpType(HttpType.GET);
-            srw.setUri(uri);
-            
-            _restProcessor.callRest(srw);
-            
-            Log.v("INFO", "DONE: ");
-        } catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-            Log.e(TAG, "error", e);
-		}
+        Bundle bundle = intent.getExtras();
+        ServiceModel serviceModel = (ServiceModel) bundle.get("ServiceModel");
+		
+		Log.v(TAG, "STARTING" + " URI: " + serviceModel);
+		
+		//ServiceRequestWrapper srw = new ServiceRequestWrapper();
+		//srw.setHttpType(serviceModel.getHttpType());
+		//srw.setUri(serviceModel.getUri());
+		
+		_restProcessor.callRest(serviceModel);
+		
+		Log.v(TAG, "DONE HandleIntent");
 
         Log.v(TAG, "" + new Date() + ", This thread is waked up.");
 

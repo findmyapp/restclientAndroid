@@ -2,7 +2,9 @@ package no.uka.findmyapp.android.rest.library.data.model;
 
 import java.sql.Date;
 
-public class Temperature 
+import no.uka.findmyapp.android.rest.model.BaseModel;
+
+public class Temperature extends BaseModel
 {
 	private int id;
 	private int locationId;
