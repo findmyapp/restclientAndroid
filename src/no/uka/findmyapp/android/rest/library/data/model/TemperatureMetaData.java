@@ -8,7 +8,7 @@ public class TemperatureMetaData
 {
 	private TemperatureMetaData() {}
 
-	public static final String AUTHORITY = "no.uka.findmyapp.android.rest.library.data.contentproviders.TemperatureProvider"; 
+	public static final String AUTHORITY = "no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider"; 
 	public static final Uri CONTENT_PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "temperatures");
 	public static final String DATABASE_NAME = "temperature.db";
 	public static final int DATABASE_VERSION = 1; 

@@ -1,4 +1,4 @@
-package no.uka.findmyapp.android.rest.library.data.contentproviders;
+package no.uka.findmyapp.android.rest.library.data.providers;
 
 import java.sql.SQLException;
 import java.util.HashMap;
