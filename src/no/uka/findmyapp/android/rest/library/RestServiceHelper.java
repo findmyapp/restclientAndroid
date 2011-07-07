@@ -1,5 +1,8 @@
 package no.uka.findmyapp.android.rest.library;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import no.uka.findmyapp.android.rest.demo.AndroidRestClientDemoActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -41,19 +44,10 @@ public class RestServiceHelper {
 		return INSTANCE;
 	}
 	
-	public void startServiceTest(Context context) {
+	public void startServiceTest(Context context, URI uri,  HttpType httpType) {
 		Intent selectIntent = new Intent(context, SimpleIntentService.class);
-        selectIntent.putExtra("userAction",
-                "1");
-
+		selectIntent.putExtra("URI", uri);
+		selectIntent.putExtra("HttpType", httpType);
         context.startService(selectIntent);
-
-        selectIntent = new Intent(context, SimpleIntentService.class);
-        selectIntent.putExtra("userAction",
-                "2");
-
-        context.startService(selectIntent);
-
-		//context.startService(new Intent(context, SimpleIntentService.class));
 	}
 }
