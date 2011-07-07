@@ -27,7 +27,7 @@ public class RestProcessor {
 			switch(srw.getHttpType()) {
 				case GET :
 					 resp = rm.get("", ServiceDataFormat.JSON);
-			
+					 gson.fromJson(resp, typeOfT);
 				break;
 				case POST :
 					//TODO

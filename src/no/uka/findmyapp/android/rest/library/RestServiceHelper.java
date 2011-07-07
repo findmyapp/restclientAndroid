@@ -4,8 +4,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import no.uka.findmyapp.android.rest.demo.AndroidRestClientDemoActivity;
+import no.uka.findmyapp.android.rest.model.ServiceModel;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 /**
  * The rest service helper class, a singleton 
@@ -44,10 +46,11 @@ public class RestServiceHelper {
 		return INSTANCE;
 	}
 	
-	public void startServiceTest(Context context, URI uri,  HttpType httpType) {
+	public void startServiceTest(Context context, ServiceModel serviceModel) {
 		Intent selectIntent = new Intent(context, SimpleIntentService.class);
-		selectIntent.putExtra("URI", uri);
-		selectIntent.putExtra("HttpType", httpType);
+		//Bundle bundle = new Bundle();
+		//selectIntent.putExtra(name, value)
+		selectIntent.putExtra("ServiceModel", serviceModel);
         context.startService(selectIntent);
 	}
 }
