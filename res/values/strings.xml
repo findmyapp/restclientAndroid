@@ -5,6 +5,9 @@
     <string name="url">http://www.findmyapp.net/</string>
     <string name="parameters">findmyapp/echo</string>
     <string name="choseDataFormat">Velg dataformat</string>
+    <string name="rest_service_started">RestService Started!</string>
+    <string name="rest_service_stopped">RestService Stopped</string>
+    <string name="rest_service_label">RestService_label</string>
     <string-array name="expectedDataFormat">
         <item>json</item>
         <item>xml</item>

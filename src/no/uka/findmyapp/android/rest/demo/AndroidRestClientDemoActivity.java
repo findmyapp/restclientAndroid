@@ -1,6 +1,8 @@
 package no.uka.findmyapp.android.rest.demo;
 
 import no.uka.findmyapp.android.rest.library.RestMethod;
+import no.uka.findmyapp.android.rest.library.RestServiceHelper;
+import no.uka.findmyapp.android.rest.library.Servicesss;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 public class AndroidRestClientDemoActivity extends Activity implements OnClickListener{ 
 
+	private static RestServiceHelper serviceHelper = RestServiceHelper.getInstance(); 
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,17 +58,27 @@ public class AndroidRestClientDemoActivity extends Activity implements OnClickLi
     }
     
     private void executeRestClient(String url, String parameters, String expectedDataType, String requestMethod) {
+    	this.executeDemoMethods(); 
+    	
         RestMethod rm = new RestMethod(url);
         
         String info = "URL: " + url + "\nParamters: " + parameters + "\nDataFormat: " + expectedDataType + "\nRequestMethod: " + requestMethod + "\n\n"; 
         TextView tv = (TextView) findViewById(R.id.textview);
-
+        
         try {
 			tv.setText(info + rm.get(parameters, expectedDataType));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			tv.setText(info + e.getMessage());
     	} 
+    }
+    
+    private void executeDemoMethods() {
+    	initializeService(); 
+    }
+    
+    private void initializeService() {
+    	serviceHelper.startServiceTest(); 
     }
     
     public class MyOnItemSelectedListener implements OnItemSelectedListener {
