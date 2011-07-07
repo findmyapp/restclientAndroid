@@ -1,6 +1,5 @@
 package no.uka.findmyapp.android.rest.library;
 
-<<<<<<< HEAD
 import android.util.Log;
 import android.widget.Toast;
 import no.uka.findmyapp.android.rest.R;
