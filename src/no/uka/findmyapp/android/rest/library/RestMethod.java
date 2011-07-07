@@ -68,6 +68,9 @@ public class RestMethod {
 		}
 	}
 	
+	public RestMethod() {
+	}
+	
 	/** 
 	 * @param url Base URL to the service
 	 */

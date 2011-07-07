@@ -1,6 +1,5 @@
 package no.uka.findmyapp.android.rest.demo;
 
-import no.uka.findmyapp.android.rest.R;
 import no.uka.findmyapp.android.rest.library.RestMethod;
 import no.uka.findmyapp.android.rest.library.RestService;
 import no.uka.findmyapp.android.rest.library.RestServiceHelper;
@@ -60,8 +59,10 @@ public class AndroidRestClientDemoActivity extends Activity implements OnClickLi
     }
     
     private void executeRestClient(String url, String parameters, String expectedDataType, String requestMethod) {
-    	this.executeDemoMethods(); 
+    	this.executeDemoMethods();
     	
+    	
+    	/*
         RestMethod rm = new RestMethod(url);
         
         String info = "URL: " + url + parameters + "\nDataFormat: " + expectedDataType + "\nRequestMethod: " + requestMethod + "\n\n"; 
@@ -72,7 +73,8 @@ public class AndroidRestClientDemoActivity extends Activity implements OnClickLi
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			tv.setText(info + e.getMessage());
-    	} 
+    	} */
+    	
     }
     
     private void executeDemoMethods() {

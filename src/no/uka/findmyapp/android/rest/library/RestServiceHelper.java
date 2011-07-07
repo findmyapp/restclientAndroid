@@ -42,6 +42,18 @@ public class RestServiceHelper {
 	}
 	
 	public void startServiceTest(Context context) {
-		context.startService(new Intent(context, RestService.class));
+		Intent selectIntent = new Intent(context, SimpleIntentService.class);
+        selectIntent.putExtra("userAction",
+                "1");
+
+        context.startService(selectIntent);
+
+        selectIntent = new Intent(context, SimpleIntentService.class);
+        selectIntent.putExtra("userAction",
+                "2");
+
+        context.startService(selectIntent);
+
+		//context.startService(new Intent(context, SimpleIntentService.class));
 	}
 }
