@@ -55,6 +55,7 @@ public class RestService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+    	super.onStartCommand(intent, flags, startId);
         Log.i("LocalService", "Received start id " + startId + ": " + intent);
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.

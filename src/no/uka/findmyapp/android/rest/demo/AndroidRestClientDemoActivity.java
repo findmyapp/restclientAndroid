@@ -61,21 +61,6 @@ public class AndroidRestClientDemoActivity extends Activity implements OnClickLi
     
     private void executeRestClient(String url, String parameters, String expectedDataType, String requestMethod) {
     	this.executeDemoMethods();
-    	
-    	
-    	/*
-        RestMethod rm = new RestMethod(url);
-        
-        String info = "URL: " + url + parameters + "\nDataFormat: " + expectedDataType + "\nRequestMethod: " + requestMethod + "\n\n"; 
-        TextView tv = (TextView) findViewById(R.id.textview);
-        
-        try {
-			tv.setText(info + rm.get(parameters, expectedDataType));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			tv.setText(info + e.getMessage());
-    	} */
-    	
     }
     
     private void executeDemoMethods() {
