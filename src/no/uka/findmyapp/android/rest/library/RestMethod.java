@@ -69,6 +69,7 @@ public class RestMethod {
 	}
 	
 	public RestMethod() {
+		
 	}
 	
 	/** 

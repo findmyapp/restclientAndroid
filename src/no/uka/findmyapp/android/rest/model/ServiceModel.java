@@ -1,20 +1,21 @@
 package no.uka.findmyapp.android.rest.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.net.URI;
 
 import no.uka.findmyapp.android.rest.library.HttpType;
 
-public class ServiceModel  implements Serializable{
+public class ServiceModel implements Serializable{
 	private URI uri;
 	private HttpType httpType;
-	private String returnType;
+	private Type returnType;
 	
-	public ServiceModel(URI uri, HttpType httpType, String returnType) {
+	public ServiceModel(URI uri, HttpType httpType, Type typeToken) {
 		super();
 		this.uri = uri;
 		this.httpType = httpType;
-		this.returnType = returnType;
+		this.returnType = typeToken;
 	}
 	public URI getUri() {
 		return uri;
@@ -28,10 +29,10 @@ public class ServiceModel  implements Serializable{
 	public void setHttpType(HttpType httpType) {
 		this.httpType = httpType;
 	}
-	public String getReturnType() {
+	public Type getReturnType() {
 		return returnType;
 	}
-	public void setReturnType(String returnType) {
+	public void setReturnType(Type returnType) {
 		this.returnType = returnType;
 	}
 	@Override
@@ -39,4 +40,5 @@ public class ServiceModel  implements Serializable{
 		return "ServiceModel [uri=" + uri + ", httpType=" + httpType
 				+ ", returnType=" + returnType + "]";
 	}
+	
 }

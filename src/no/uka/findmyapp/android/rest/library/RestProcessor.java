@@ -6,7 +6,9 @@ import com.google.gson.GsonBuilder;
 import android.util.Log;
 import android.widget.Toast;
 import no.uka.findmyapp.android.rest.R;
+import no.uka.findmyapp.android.rest.library.data.model.Temperature;
 import no.uka.findmyapp.android.rest.model.BaseModel;
+import no.uka.findmyapp.android.rest.model.ServiceModel;
 
 /**
  * 
@@ -20,14 +22,17 @@ public class RestProcessor {
 		gson = builder.create();
 	}
 	
-	public void callRest(ServiceRequestWrapper srw) {
-		rm.setUrl(srw.getUri().toString());
+	public void callRest(ServiceModel serviceModel) {
+		rm.setUrl(serviceModel.getUri().toString());
 		try {
 			String resp = "";
-			switch(srw.getHttpType()) {
+			Object temp;
+			switch(serviceModel.getHttpType()) {
 				case GET :
 					 resp = rm.get("", ServiceDataFormat.JSON);
-					 gson.fromJson(resp, typeOfT);
+					 temp = (Object) gson.fromJson(resp, serviceModel.getReturnType());
+					 Log.v("INFO", resp.toString());
+					 Log.v("INFO", temp.toString());
 				break;
 				case POST :
 					//TODO

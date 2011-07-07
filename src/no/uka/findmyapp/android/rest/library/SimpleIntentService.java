@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.Date;
 
 import no.uka.findmyapp.android.rest.R;
+import no.uka.findmyapp.android.rest.model.ServiceModel;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -28,16 +29,15 @@ public class SimpleIntentService extends IntentService {
         Log.v(TAG, "" + new Date() + ", In onHandleIntent for thread id = " + Thread.currentThread().getId());
 
         Bundle bundle = intent.getExtras();
-		URI uri = (URI) bundle.get("URI");
-		HttpType httpType = (HttpType) bundle.get("HttpType");
+        ServiceModel serviceModel = (ServiceModel) bundle.get("ServiceModel");
 		
-		Log.v(TAG, "STARTING" + " URI: " + uri + " HttpType: " + httpType);
+		Log.v(TAG, "STARTING" + " URI: " + serviceModel);
 		
-		ServiceRequestWrapper srw = new ServiceRequestWrapper();
-		srw.setHttpType(httpType);
-		srw.setUri(uri);
+		//ServiceRequestWrapper srw = new ServiceRequestWrapper();
+		//srw.setHttpType(serviceModel.getHttpType());
+		//srw.setUri(serviceModel.getUri());
 		
-		_restProcessor.callRest(srw);
+		_restProcessor.callRest(serviceModel);
 		
 		Log.v(TAG, "DONE HandleIntent");
 
