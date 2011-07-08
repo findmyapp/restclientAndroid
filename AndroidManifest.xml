@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
 		<service android:name=".library.SimpleIntentService"/>
+		
 		<provider android:name="no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider" 
 		android:authorities="no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider" />
     </application>

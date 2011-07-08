@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.net.URI;
 
+import android.content.ContentResolver;
+
 import no.uka.findmyapp.android.rest.library.HttpType;
 
 public class ServiceModel implements Serializable{
@@ -17,6 +19,9 @@ public class ServiceModel implements Serializable{
 		this.httpType = httpType;
 		this.returnType = typeToken;
 	}
+	
+
+
 	public URI getUri() {
 		return uri;
 	}

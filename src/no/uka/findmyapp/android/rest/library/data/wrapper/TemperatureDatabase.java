@@ -1,6 +1,8 @@
 package no.uka.findmyapp.android.rest.library.data.wrapper;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import no.uka.findmyapp.android.rest.library.data.model.Temperature;
 import no.uka.findmyapp.android.rest.library.data.model.TemperatureMetaData;
@@ -26,12 +28,24 @@ public class TemperatureDatabase {
 	
 	public void addNewTemperatureSample(ContentResolver contentResolver, Temperature tSample) {
 		ContentValues contentValues = new ContentValues(); 
-		
+		//DateFormat df = new SimpleDateFormat();
 		contentValues.put(TemperatureMetaData.TemperatureTable.LOCATION_ID, tSample.getLocationId());
 		contentValues.put(TemperatureMetaData.TemperatureTable.VALUE, tSample.getValue());
-		contentValues.put(TemperatureMetaData.TemperatureTable.DATE, tSample.getDate().toLocaleString());
+		//contentValues.put(TemperatureMetaData.TemperatureTable.DATE, "2011-10-10 13:13:13.213");
 		
 		contentResolver.insert(TemperatureMetaData.CONTENT_PROVIDER_URI, contentValues);
+	}
+	
+	public void getLatestTemperature(ContentResolver contentResolver, int locationId) {
+		ContentValues contentValues = new ContentValues(); 
+		Cursor cursor = contentResolver.query(TemperatureMetaData.CONTENT_PROVIDER_URI, null, 
+				TemperatureMetaData.TemperatureTable.LOCATION_ID + "='" + locationId + "'", 
+				null, null);
+		if (cursor != null) {
+			cursor.moveToFirst();
+			cursor.getLong(cursor.getColumnIndex(TemperatureMetaData.TemperatureTable.VALUE));
+			Log.v("INFO", cursor.getFloat(cursor.getColumnIndex(TemperatureMetaData.TemperatureTable.VALUE)) + "");
+        }
 	}
 	
 	public boolean isTemperatureInDB(ContentResolver contentResolver, int locationId, Date date) {

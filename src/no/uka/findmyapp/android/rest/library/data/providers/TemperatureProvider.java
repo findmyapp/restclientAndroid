@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
 public class TemperatureProvider extends ContentProvider{
 	private TemperatureDbHelper dbHelper; 
@@ -39,11 +40,13 @@ public class TemperatureProvider extends ContentProvider{
 		temperatureProjectionMap.put(
 			TemperatureMetaData.TemperatureTable.DATE, TemperatureMetaData.TemperatureTable.DATE
 		);
+		
 	}
 	
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase(); 
+		
 		int count = 0; 
 		switch (uriMatcher.match(uri)) {
 		case TEMPERATURE:
@@ -60,19 +63,24 @@ public class TemperatureProvider extends ContentProvider{
 
 	@Override
 	public String getType(Uri uri) {
+		Log.v("DEBUG", "URI " + uri);
 		switch (uriMatcher.match(uri)) {
 		case TEMPERATURE:
+			Log.v("DEBUG", "INSIDE");
 			return TemperatureMetaData.CONTENT_TYPE_TEMPERATURE_ITEM;
 		default:
+			Log.v("DEBUG", "DEFAULT");
 			throw new IllegalArgumentException("Unknown URI " + uri);
 		}
 	}
 
 	@Override
 	public Uri insert(Uri uri, ContentValues initValues) {
+		Log.v("DEBUG", "URI - INSERT " + uri);
 		if(uriMatcher.match(uri) != TEMPERATURE) {
 			throw new IllegalArgumentException("Unknown URI " + uri);
 		}
+		Log.v("DEBUG", "URI - INSERT AFTER" + uri);
 		
 		ContentValues values; 
 		if(initValues != null) {
@@ -83,6 +91,8 @@ public class TemperatureProvider extends ContentProvider{
 		}
 		
 		SQLiteDatabase db = dbHelper.getWritableDatabase(); 
+        Log.v("INFO", "DB: " +db.toString());
+		
 		
 		/* The second insert() parameter is a nullColumnHack, 
 		 * somewhat a crappy solution that is used to avoid 
@@ -94,6 +104,7 @@ public class TemperatureProvider extends ContentProvider{
 		long rowId = db.insert(TemperatureMetaData.TemperatureTable.TABLE_NAME, TemperatureMetaData.TemperatureTable.LOCATION_ID, values);
 		if(rowId > 0) {
 			Uri temperatureUri = ContentUris.withAppendedId(TemperatureMetaData.CONTENT_PROVIDER_URI, rowId);
+			getContext().getContentResolver().notifyChange(uri, null);
 			return temperatureUri;
 		}
 		throw new IllegalArgumentException("InsertUnknown URI: " + uri);
@@ -101,8 +112,15 @@ public class TemperatureProvider extends ContentProvider{
 
 	@Override
 	public boolean onCreate() {
-		this.dbHelper = new TemperatureDbHelper(getContext());
-		return false;
+		Log.v("TP", "CREATED");
+		dbHelper = new TemperatureDbHelper(getContext());
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+		Log.v("TP", "CREATED" + db);
+		boolean b = (dbHelper == null) ? false : true;
+
+		Log.v("TP", "CREATED" + b);
+		return b;
 	}
 	
     @Override
@@ -120,6 +138,8 @@ public class TemperatureProvider extends ContentProvider{
         }
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Log.v("INFO", "DB: " +db.toString());
+        Log.v("INFO", "URI: " +uri);
         Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
 
         c.setNotificationUri(getContext().getContentResolver(), uri);

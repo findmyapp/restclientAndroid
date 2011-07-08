@@ -37,7 +37,7 @@ public class SimpleIntentService extends IntentService {
 		//srw.setHttpType(serviceModel.getHttpType());
 		//srw.setUri(serviceModel.getUri());
 		
-		_restProcessor.callRest(serviceModel);
+		_restProcessor.callRest(serviceModel, this.getContentResolver());
 		
 		Log.v(TAG, "DONE HandleIntent");
 
