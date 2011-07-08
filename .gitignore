@@ -7,3 +7,5 @@ gen/
 .settings/
 global-groovy.log
 credentials.properties
+
+/bin
