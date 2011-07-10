@@ -3,8 +3,8 @@ package no.uka.findmyapp.android.rest.library;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import no.uka.findmyapp.android.rest.demo.AndroidRestClientDemoActivity;
-import no.uka.findmyapp.android.rest.model.ServiceModel;
+import no.uka.findmyapp.android.rest.demo.AndroidRestSuite;
+import no.uka.findmyapp.android.rest.library.data.model.ServiceModel;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,8 +32,6 @@ public class RestServiceHelper {
 	 * The singleton RestServiceHelper instance
 	 */
 	private static RestServiceHelper INSTANCE; 
-
-	
 	
 	private RestServiceHelper() {
 	}
@@ -47,7 +45,7 @@ public class RestServiceHelper {
 	}
 	
 	public void startServiceTest(Context context, ServiceModel serviceModel) {
-		Intent selectIntent = new Intent(context, SimpleIntentService.class);
+		Intent selectIntent = new Intent(context, RestIntentService.class);
 		//Bundle bundle = new Bundle();
 		//selectIntent.putExtra(name, value)
 		selectIntent.putExtra("ServiceModel", serviceModel);

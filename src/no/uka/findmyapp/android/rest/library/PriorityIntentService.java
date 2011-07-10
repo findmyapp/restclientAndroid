@@ -18,7 +18,6 @@ public class PriorityIntentService extends Service {
         int priority;
         int startId;
 
-        @Override
         public int compareTo(QueueItem another) {
             if (this.priority < another.priority) {
                 return -1;
@@ -29,6 +28,7 @@ public class PriorityIntentService extends Service {
             }
         }
     }
+    
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
@@ -47,6 +47,7 @@ public class PriorityIntentService extends Service {
             }
         }
     }
+    
     public static final String EXTRA_PRIORITY = "priority";
     private String mName;
     private PriorityBlockingQueue<QueueItem> mQueue;

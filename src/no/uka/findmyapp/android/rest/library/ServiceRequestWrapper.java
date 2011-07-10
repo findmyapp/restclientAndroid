@@ -17,5 +17,4 @@ public class ServiceRequestWrapper {
 	public void setHttpType(HttpType httpType) {
 		this.httpType = httpType;
 	}
-	
 }

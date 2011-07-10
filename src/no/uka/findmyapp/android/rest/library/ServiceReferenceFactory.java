@@ -6,8 +6,8 @@ import java.net.URISyntaxException;
 
 import com.google.gson.reflect.TypeToken;
 
+import no.uka.findmyapp.android.rest.library.data.model.ServiceModel;
 import no.uka.findmyapp.android.rest.library.data.model.Temperature;
-import no.uka.findmyapp.android.rest.model.ServiceModel;
 
 public class ServiceReferenceFactory {
 	public enum Services {TEMP, XX}

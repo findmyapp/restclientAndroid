@@ -4,20 +4,25 @@
       android:versionCode="1"
       android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8" />
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.STATUS_BAR"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.STATUS_BAR" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".demo.AndroidRestClientDemoActivity"
+        <activity android:name=".demo.AndroidRestSuite"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<service android:name=".library.SimpleIntentService"/>
+		<activity android:name="no.uka.findmyapp.android.rest.demo.activities.TemperatureDemo" />
+		<activity android:name="no.uka.findmyapp.android.rest.demo.activities.RestDebugTool" />
+		<activity android:name=".demo.activities.DebugResult" />
 		
-		<provider android:name="no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider" 
-		android:authorities="no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider" />
+		<service android:name=".library.RestIntentService"/>
+		
+		<provider
+			android:name=".library.data.providers.TemperatureProvider" 
+			android:authorities="no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider" />
     </application>
 </manifest>

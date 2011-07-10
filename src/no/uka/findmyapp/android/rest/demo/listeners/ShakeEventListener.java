@@ -63,7 +63,6 @@ public class ShakeEventListener implements SensorEventListener {
     mShakeListener = listener;
   }
 
-  @Override
   public void onSensorChanged(SensorEvent se) {
     // get sensor data
     float x = se.values[SensorManager.DATA_X];
@@ -126,7 +125,6 @@ public class ShakeEventListener implements SensorEventListener {
     lastZ = 0;
   }
 
-  @Override
   public void onAccuracyChanged(Sensor sensor, int accuracy) {
   }
 

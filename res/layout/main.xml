@@ -1,43 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    <EditText
-        android:id="@+id/editurl"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/url"/>
-   	<EditText
-        android:id="@+id/editparams"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/parameters"/>
-    <Spinner
-		 android:id="@+id/chooseFormat"
-		 android:layout_width="fill_parent"
-		 android:layout_height="wrap_content"
-		 android:drawSelectorOnTop="false"/>
-	<Spinner
-		 android:id="@+id/chooseAction"
-		 android:layout_width="fill_parent"
-		 android:layout_height="wrap_content"
-		 android:drawSelectorOnTop="false"/>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
 	<Button 
-		android:id="@+id/button"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:text="Test" />
-	<ScrollView   
-        android:id="@+id/ScrollView01"  
-        android:layout_height="fill_parent"   
-        android:layout_width="fill_parent">
-		<TextView  
-			android:id="@+id/textview"
-		    android:layout_width="fill_parent" 
-		    android:layout_height="wrap_content" 
-		    android:text="@string/hello"
-		    android:scrollbars="vertical"/>
-	</ScrollView>
-</LinearLayout>
+		android:id="@+id/debugMenuEntry"
+		android:layout_width="fill_parent"
+		android:layout_height="50dp"
+		android:text="@string/debugMenuEntry"/>
+	<Button 
+		android:id="@+id/temperatureDemoEntry"
+		android:layout_below="@id/debugMenuEntry"
+		android:layout_width="fill_parent"
+		android:layout_height="50dp"
+		android:text="@string/temperatureDemoMenuEntry" />
+</RelativeLayout>

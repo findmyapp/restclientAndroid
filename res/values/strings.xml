@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">RestClientDemo</string>
-    <string name="app_name">AndroidHaxx</string>
+	<!-- General -->
+    <string name="app_name">Android REST-suite</string>
+    <string name="hello">Temporary</string>
+    
+    <!-- Menu Entries -->
+    <string name="debugMenuEntry">Debug tool</string>
+    <string name="temperatureDemoMenuEntry">Temperature Demo</string>
+    
+    <!-- Debug preferences -->
     <string name="url">http://www.findmyapp.net/</string>
     <string name="parameters">findmyapp/program/2011/events?date=2011-10-03</string>
-    <string name="choseDataFormat">Velg dataformat</string>
     <string name="rest_service_started">RestService Started!</string>
     <string name="rest_service_stopped">RestService Stopped</string>
     <string name="rest_service_label">RestService_label</string>
+    <string name="chooseDataFormat">Choose datatype</string>
     <string-array name="expectedDataFormat">
         <item>json</item>
         <item>xml</item>
     </string-array>
-    <string name="chooseAction">Velg handling</string>
+    <string name="chooseAction">Choose action</string>
     <string-array name="action">
         <item>GET</item>
         <item>PUT</item>

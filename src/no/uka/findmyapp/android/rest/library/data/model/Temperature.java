@@ -2,7 +2,6 @@ package no.uka.findmyapp.android.rest.library.data.model;
 
 import java.sql.Date;
 
-import no.uka.findmyapp.android.rest.model.BaseModel;
 
 public class Temperature extends BaseModel
 {
