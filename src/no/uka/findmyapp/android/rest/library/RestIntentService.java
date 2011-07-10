@@ -43,10 +43,6 @@ public class RestIntentService extends IntentService {
 		
 		Log.v(TAG, "STARTING" + " URI: " + serviceModel);
 		
-		//ServiceRequestWrapper srw = new ServiceRequestWrapper();
-		//srw.setHttpType(serviceModel.getHttpType());
-		//srw.setUri(serviceModel.getUri());
-		
 		_restProcessor.callRest(serviceModel, this.getContentResolver());
 		
 		Log.v(TAG, "DONE HandleIntent");
