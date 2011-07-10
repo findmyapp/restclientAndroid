@@ -17,13 +17,13 @@
     <string name="chooseDataFormat">Choose datatype</string>
     <string-array name="expectedDataFormat">
         <item>json</item>
-        <item>xml</item>
     </string-array>
     <string name="chooseAction">Choose action</string>
     <string-array name="action">
         <item>GET</item>
         <item>PUT</item>
         <item>POST</item>
+        <item>UPDATE</item>
         <item>DELETE</item>
     </string-array>
 </resources>

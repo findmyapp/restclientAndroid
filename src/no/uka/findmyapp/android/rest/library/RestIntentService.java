@@ -25,11 +25,11 @@ import android.widget.Toast;
 
 public class RestIntentService extends IntentService {
 
-    public static final String TAG = "SimpleIntentService";
+    public static final String TAG = "RestIntentService";
     private RestProcessor _restProcessor;
 
     public RestIntentService() {
-        super("SimpleIntentService");
+        super("RestIntentService");
         _restProcessor = new RestProcessor();
     }
 
