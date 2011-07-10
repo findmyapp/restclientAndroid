@@ -83,16 +83,16 @@ public class RestMethod {
 		return useragent;
 	}
 
-	public void setUseragent(String useragent) {
-		this.useragent = useragent;
-	}
-	
 	public String getUrl() {
 		return url;
 	}
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public void setUseragent(String useragent) {
+		this.useragent = useragent;
 	}
 
 	public String get(String parameters, ServiceDataFormat serviceDataFormat) throws Exception {
@@ -118,7 +118,7 @@ public class RestMethod {
 			// Check if server response is valid
 			StatusLine status = response.getStatusLine();
 			if (status.getStatusCode() != HTTP_STATUS_OK) {
-				this.createErrorMessage(status.getStatusCode());
+				this.throwHttpStatusException(status.getStatusCode());
 			}
 	
 			// Pull content stream from response
@@ -143,12 +143,11 @@ public class RestMethod {
 	}
 
 	/**
-	 * Method that decides which HTTP status code that should 
-	 * be reported. 
+	 * Throws a HTTPStatusExcetion decided by a response/status code
 	 * 
 	 * @param statusCode
 	 */
-	private void createErrorMessage(int statusCode) throws HTTPStatusException{
+	private void throwHttpStatusException(int statusCode) throws HTTPStatusException{
 		switch (statusCode) {
 			case HTTP_STATUS_BAD_REQUEST:
 				throw new HTTPStatusException(HTTP_STATUS_BAD_REQUEST, "400 Bad Request (HTTP/1.1 - RFC 2616)");
