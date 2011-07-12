@@ -24,13 +24,12 @@ import android.widget.Toast;
  */
 
 public class RestIntentService extends IntentService {
-
     public static final String TAG = "RestIntentService";
     private RestProcessor _restProcessor;
 
     public RestIntentService() {
         super("RestIntentService");
-        _restProcessor = new RestProcessor();
+        _restProcessor = new RestProcessor(this.getApplicationContext());
     }
 
 	@Override
@@ -42,8 +41,8 @@ public class RestIntentService extends IntentService {
         ServiceModel serviceModel = (ServiceModel) bundle.get("ServiceModel");
 		
 		Log.v(TAG, "STARTING" + " URI: " + serviceModel);
-		
-		_restProcessor.callRest(serviceModel, this.getContentResolver());
+	//	this.getApplication
+		_restProcessor.callRest(serviceModel);
 		
 		Log.v(TAG, "DONE HandleIntent");
         Log.v(TAG, "" + new Date() + ", This thread is waked up.");

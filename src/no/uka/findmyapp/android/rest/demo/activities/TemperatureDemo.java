@@ -2,12 +2,13 @@ package no.uka.findmyapp.android.rest.demo.activities;
 
 import java.util.ArrayList;
 
+
 import no.uka.findmyapp.android.rest.R;
 import no.uka.findmyapp.android.rest.demo.adapters.BarAdapter;
 import no.uka.findmyapp.android.rest.demo.listeners.ShakeEventListener;
 import no.uka.findmyapp.android.rest.library.RestServiceHelper;
-import no.uka.findmyapp.android.rest.library.ServiceReferenceFactory;
 import no.uka.findmyapp.android.rest.library.data.model.TemperatureMetaData;
+import no.uka.findmyapp.android.rest.library.RestServiceHelper.ServiceReferenceFactory; 
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -74,7 +75,9 @@ public class TemperatureDemo extends Activity implements OnClickListener {
     
     private void initializeService() {
     	// ServiceReferenceFactory returns a ServiceModelObject
-    	serviceHelper.startServiceTest(this, ServiceReferenceFactory.getService(ServiceReferenceFactory.Services.TEMP)); 
+    	//serviceHelper.startServiceTest(this, )); 
+    	
+    	//ServiceModel sm = new ServiceModel
     }
     
     private void showBar() {

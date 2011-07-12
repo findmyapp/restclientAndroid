@@ -1,13 +1,16 @@
 package no.uka.findmyapp.android.rest.library;
 
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import no.uka.findmyapp.android.rest.demo.AndroidRestSuite;
 import no.uka.findmyapp.android.rest.library.data.model.ServiceModel;
+import no.uka.findmyapp.android.rest.library.data.model.Temperature;
+import no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+
+import com.google.gson.reflect.TypeToken;
 
 /**
  * The rest service helper class, a singleton 
@@ -27,11 +30,12 @@ import android.os.Bundle;
  *  	- Dispatch callbacks to the user interface listeners
  */
 public class RestServiceHelper {
-	
 	/**
 	 * The singleton RestServiceHelper instance
 	 */
 	private static RestServiceHelper INSTANCE; 
+	
+	public static enum Services {TEMP, XX}
 	
 	private RestServiceHelper() {
 	}
@@ -46,9 +50,36 @@ public class RestServiceHelper {
 	
 	public void startServiceTest(Context context, ServiceModel serviceModel) {
 		Intent selectIntent = new Intent(context, RestIntentService.class);
-		//Bundle bundle = new Bundle();
-		//selectIntent.putExtra(name, value)
 		selectIntent.putExtra("ServiceModel", serviceModel);
         context.startService(selectIntent);
 	}
+	
+	public class ServiceReferenceFactory {
+		public ServiceModel getService(Services service) {
+			switch(service) {
+				case TEMP :
+					try {
+						Type typeToken = new TypeToken<Temperature>(){}.getType();
+
+						String uri = ServicesConstants.SERVICE1_URI; 
+						
+						return new ServiceModel(
+								new URI(String.format(ServicesConstants.SERVICE1_URI, "1")), 
+								HttpType.GET, 
+								ServiceDataFormat.JSON,
+								typeToken, 
+								TemperatureProvider.CONTENT_PROVIDER_URI);
+						
+					} catch (URISyntaxException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+				case XX :
+					break;
+			}
+			return null;
+		}
+	}
+
 }

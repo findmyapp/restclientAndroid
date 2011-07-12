@@ -2,6 +2,7 @@ package no.uka.findmyapp.android.rest.library;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.net.URI;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -43,30 +44,12 @@ public class RestMethod {
 	 * {@link #RestClient(String)} 
 	 * {@link #RestClient(String, String)}
 	 */
-	private String url; 
+	private URI uri; 
 	
 	/**
 	 * Instance HTTP client
 	 */
 	private HttpClient client; 
-	
-	/**
-	 * 
-	 */
-	public static class HTTPStatusException extends Exception {
-		private int statusCode; 
-		
-		public HTTPStatusException(int statusCode, String errorMessage) {
-			super(errorMessage);
-			this.statusCode = statusCode; 
-		}
-		/**
-		 * @return HTTP status code
-		 */
-		public int getHttpStatusCode() {
-			return this.statusCode; 
-		}
-	}
 	
 	public RestMethod() {
 		
@@ -75,29 +58,28 @@ public class RestMethod {
 	/** 
 	 * @param url Base URL to the service
 	 */
-	public RestMethod(String url) {
-		this.url = url; 
+	public RestMethod(URI uri) {
+		this.uri = uri; 
 	}
 
 	public String getUseragent() {
 		return useragent;
 	}
 
-	public String getUrl() {
-		return url;
+	public URI getUri() {
+		return this.uri;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setUri(URI uri) {
+		this.uri = uri;
 	}
 
 	public void setUseragent(String useragent) {
 		this.useragent = useragent;
 	}
 
-	public String get(String parameters, ServiceDataFormat serviceDataFormat) throws Exception {
-		String requestUrl = this.url + parameters; 
-		HttpGet request = new HttpGet(requestUrl);
+	public String get(ServiceDataFormat serviceDataFormat) throws Exception {
+		HttpGet request = new HttpGet(this.uri);
 		
 		return this.execute(setRequestHeaders(serviceDataFormat.getValue(), request));
 	}
@@ -163,6 +145,25 @@ public class RestMethod {
 				throw new HTTPStatusException(HTTP_STATUS_INTERNAL_SERVER_ERROR, "500 Server Error (HTTP/1.0 - RFC 1945)");
 			default:
 				throw new HTTPStatusException(UNHANDLED_STATUS_CODE, "Unhandled status code: " + statusCode);
+		}
+	}
+	
+	
+	/**
+	 * 
+	 */
+	public static class HTTPStatusException extends Exception {
+		private int statusCode; 
+		
+		public HTTPStatusException(int statusCode, String errorMessage) {
+			super(errorMessage);
+			this.statusCode = statusCode; 
+		}
+		/**
+		 * @return HTTP status code
+		 */
+		public int getHttpStatusCode() {
+			return this.statusCode; 
 		}
 	}
 }

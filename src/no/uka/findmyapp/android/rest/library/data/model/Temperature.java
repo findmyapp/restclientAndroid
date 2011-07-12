@@ -1,9 +1,13 @@
 package no.uka.findmyapp.android.rest.library.data.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Temperature extends BaseModel
+
+public class Temperature implements Serializable
 {
 	private int id;
 	private int locationId;

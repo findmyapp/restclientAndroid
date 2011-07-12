@@ -1,10 +1,8 @@
 package no.uka.findmyapp.android.rest.library.data.providers;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import no.uka.findmyapp.android.rest.library.data.helpers.TemperatureDbHelper;
-import no.uka.findmyapp.android.rest.library.data.model.TemperatureMetaData;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -13,32 +11,42 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.text.TextUtils;
+import android.provider.BaseColumns;
 import android.util.Log;
 
 public class TemperatureProvider extends ContentProvider{
 	private TemperatureDbHelper dbHelper; 
 	private static final int TEMPERATURE = 1; 
+
+	// Temperature metadata
+	public static final String AUTHORITY = "no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider"; 
+	public static final Uri CONTENT_PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/temperature");
+	public static final String DATABASE_NAME = "temperature.db";
+	public static final int DATABASE_VERSION = 1; 
+	//TODO implement article MIME
+	//content type for one item: vnd.android.cursor.item/vnd.your-domain.your-item-name
+	public static final String CONTENT_TYPE_TEMPERATURE_ITEM = "vnd.android.cursor.dir/vnd.uka.temperature"; 
+	// End of metadata
 	
 	private static final UriMatcher uriMatcher; 
 	
 	private static final HashMap<String, String> temperatureProjectionMap; 
 	static {
 		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-		uriMatcher.addURI(TemperatureMetaData.AUTHORITY, TemperatureMetaData.TemperatureTable.TABLE_NAME, TEMPERATURE);
+		uriMatcher.addURI(TemperatureProvider.AUTHORITY, TemperatureProvider.TemperatureTable.TABLE_NAME, TEMPERATURE);
 		
 		temperatureProjectionMap = new HashMap<String, String>(); 
 		temperatureProjectionMap.put(
-			TemperatureMetaData.TemperatureTable.ID, TemperatureMetaData.TemperatureTable.ID
+			TemperatureProvider.TemperatureTable.ID, TemperatureProvider.TemperatureTable.ID
 		);
 		temperatureProjectionMap.put(
-			TemperatureMetaData.TemperatureTable.LOCATION_ID, TemperatureMetaData.TemperatureTable.LOCATION_ID
+			TemperatureProvider.TemperatureTable.LOCATION_ID, TemperatureProvider.TemperatureTable.LOCATION_ID
 		);
 		temperatureProjectionMap.put(
-			TemperatureMetaData.TemperatureTable.VALUE, TemperatureMetaData.TemperatureTable.VALUE
+			TemperatureProvider.TemperatureTable.VALUE, TemperatureProvider.TemperatureTable.VALUE
 		);
 		temperatureProjectionMap.put(
-			TemperatureMetaData.TemperatureTable.DATE, TemperatureMetaData.TemperatureTable.DATE
+			TemperatureProvider.TemperatureTable.DATE, TemperatureProvider.TemperatureTable.DATE
 		);
 		
 	}
@@ -50,7 +58,7 @@ public class TemperatureProvider extends ContentProvider{
 		int count = 0; 
 		switch (uriMatcher.match(uri)) {
 		case TEMPERATURE:
-			count = db.delete(TemperatureMetaData.TemperatureTable.TABLE_NAME, selection, selectionArgs);
+			count = db.delete(TemperatureProvider.TemperatureTable.TABLE_NAME, selection, selectionArgs);
 			break;
 
 		default:
@@ -67,7 +75,7 @@ public class TemperatureProvider extends ContentProvider{
 		switch (uriMatcher.match(uri)) {
 		case TEMPERATURE:
 			Log.v("DEBUG", "INSIDE");
-			return TemperatureMetaData.CONTENT_TYPE_TEMPERATURE_ITEM;
+			return TemperatureProvider.CONTENT_TYPE_TEMPERATURE_ITEM;
 		default:
 			Log.v("DEBUG", "DEFAULT");
 			throw new IllegalArgumentException("Unknown URI " + uri);
@@ -95,15 +103,15 @@ public class TemperatureProvider extends ContentProvider{
 		
 		
 		/* The second insert() parameter is a nullColumnHack, 
-		 * somewhat a crappy solution that is used to avoid 
-		 * that queries like "INSERT INTO tablename;" isn't 
+		 * a somewhat crappy solution that is used to avoid 
+		 * queries like "INSERT INTO tablename;" isn't 
 		 * declared illegal. Instead it automatically creates
 		 * a statement like "INSERT INTO temperature_table
 		 * (location_id) VALUES (NULL)" in this case.
 		 */
-		long rowId = db.insert(TemperatureMetaData.TemperatureTable.TABLE_NAME, TemperatureMetaData.TemperatureTable.LOCATION_ID, values);
+		long rowId = db.insert(TemperatureProvider.TemperatureTable.TABLE_NAME, TemperatureProvider.TemperatureTable.LOCATION_ID, values);
 		if(rowId > 0) {
-			Uri temperatureUri = ContentUris.withAppendedId(TemperatureMetaData.CONTENT_PROVIDER_URI, rowId);
+			Uri temperatureUri = ContentUris.withAppendedId(TemperatureProvider.CONTENT_PROVIDER_URI, rowId);
 			getContext().getContentResolver().notifyChange(uri, null);
 			return temperatureUri;
 		}
@@ -129,7 +137,7 @@ public class TemperatureProvider extends ContentProvider{
 
         switch (uriMatcher.match(uri)) {
             case TEMPERATURE:
-                qb.setTables(TemperatureMetaData.TemperatureTable.TABLE_NAME);
+                qb.setTables(TemperatureProvider.TemperatureTable.TABLE_NAME);
                 qb.setProjectionMap(temperatureProjectionMap);
                 break;
 
@@ -152,7 +160,7 @@ public class TemperatureProvider extends ContentProvider{
         int count;
         switch (uriMatcher.match(uri)) {
             case TEMPERATURE:
-                count = db.update(TemperatureMetaData.TemperatureTable.TABLE_NAME, values, where, whereArgs);
+                count = db.update(TemperatureProvider.TemperatureTable.TABLE_NAME, values, where, whereArgs);
                 break;
 
             default:
@@ -162,4 +170,61 @@ public class TemperatureProvider extends ContentProvider{
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
     }
+    	
+	public class TemperatureTable implements BaseColumns {
+		private TemperatureTable() {}
+		
+		// Table name
+		public static final String TABLE_NAME = "sensor_temperature"; 
+		
+		// Databasefields
+		public static final String ID = "_id";
+		public static final String LOCATION_ID = "location_id"; 
+		public static final String VALUE = "value";
+		public static final String DATE = "date";
+	}
+	
+	public class HumidityTable implements BaseColumns {
+		private HumidityTable() {}
+		
+		// Table name 
+		public static final String TABLE_NAME = "sensor_humidity"; 
+		
+		// Databasefields
+		public static final String ID = "_id";
+		public static final String LOCATION_ID = "location_id"; 
+		public static final String VALUE = "value";
+		public static final String DATE = "date";
+	}
+	
+	public class BeerTapTable implements BaseColumns {
+		private BeerTapTable() {}
+		
+		// Table name
+		public static final String TABLE_NAME = "sensor_beertap";
+		
+		// Databasefields
+		public static final String ID = "_id";
+		public static final String DATE = "date";
+		public static final String LOCATION_ID = "location_id"; 
+		public static final String TAPNR = "tapnr";
+		public static final String VALUE = "value";
+	}
+	
+	public class NoiseTable implements BaseColumns {
+		private NoiseTable() {}
+		
+		// Table name
+		public static final String TABLE_NAME = "sensor_noise";
+		
+		// Databasefields
+		public static final String ID = "_id";
+		public static final String LOCATION_ID = "location_id"; 
+		public static final String AVERAGE = "average";
+		public static final String MAX = "max";
+		public static final String MIN = "min";
+		public static final String STANDARD_DEVIATION = "standard_deviation";
+		public static final String SAMPLES = "samples";
+		public static final String DATE = "date";
+	}
 }

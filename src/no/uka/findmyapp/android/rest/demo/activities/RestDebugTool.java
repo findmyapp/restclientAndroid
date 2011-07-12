@@ -3,9 +3,11 @@ package no.uka.findmyapp.android.rest.demo.activities;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import no.uka.findmyapp.android.rest.R;
 import no.uka.findmyapp.android.rest.library.HttpType;
+import no.uka.findmyapp.android.rest.library.ServiceDataFormat;
 import no.uka.findmyapp.android.rest.library.data.model.ServiceModel;
 import android.app.Activity;
 import android.content.Intent;
@@ -58,9 +60,10 @@ public class RestDebugTool extends Activity implements OnClickListener{
 		
 		try {
 			serviceModel = new ServiceModel(
-					new URI(urlForm.getText().toString() + parameterForm.getText().toString()), 
+					new URI(urlForm.getText().toString() + parameterForm.getText().toString()),
 					this.getType((String) chosenMethod.getSelectedItem()), 
-					new TypeToken<Object>(){}.getType());
+					ServiceDataFormat.JSON,
+					new TypeToken<List<Object>>(){}.getType());
 			
 			Intent i = new Intent(this, DebugResult.class);
 			i.putExtra("request", serviceModel);
