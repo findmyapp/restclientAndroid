@@ -9,8 +9,8 @@
     <string name="temperatureDemoMenuEntry">Temperature Demo</string>
     
     <!-- Debug preferences -->
-    <string name="url">http://www.findmyapp.net/</string>
-    <string name="parameters">findmyapp/program/2011/events?date=2011-10-03</string>
+    <string name="url">http://10.0.2.2:8080/</string>
+    <string name="parameters">findmyapp/locations/1/temperature/latest</string>
     <string name="rest_service_started">RestService Started!</string>
     <string name="rest_service_stopped">RestService Stopped</string>
     <string name="rest_service_label">RestService_label</string>

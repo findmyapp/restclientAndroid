@@ -14,6 +14,11 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <receiver android:name=".library.ReciveIntent" android:enabled="true">
+				<intent-filter>
+					<action android:name="restdebugtool.broadcast.token"></action>
+				</intent-filter>
+			</receiver>
         </activity>
 		<activity android:name="no.uka.findmyapp.android.rest.demo.activities.TemperatureDemo" />
 		<activity android:name="no.uka.findmyapp.android.rest.demo.activities.RestDebugTool" />
