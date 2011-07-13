@@ -65,12 +65,11 @@ public class RestDebugTool extends Activity implements OnClickListener{
 			serviceModel = new ServiceModel(
 					new URI(urlForm.getText().toString() + parameterForm.getText().toString()),
 					this.getType((String) chosenMethod.getSelectedItem()), 
-					ServiceDataFormat.JSON,
-					new TypeToken<List<Object>>(){}.getType());
+					ServiceDataFormat.JSON, null);
 			
 			Intent i = new Intent(this, DebugResult.class);
-			
 			Log.d("BroadcastIntentDebug", "Adding service to intent bundle");
+			
 			i.putExtra("request", serviceModel);
 			Log.d("BroadcastIntentDebug", "Starting DebugResult activity");
 			startActivity(i);

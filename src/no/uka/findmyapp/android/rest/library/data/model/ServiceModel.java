@@ -9,11 +9,15 @@ import no.uka.findmyapp.android.rest.library.ServiceDataFormat;
 import android.net.Uri;
 
 public class ServiceModel implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private URI uri;
 	private HttpType httpType;
 	private ServiceDataFormat dataformat; 
 	private Type returnType;
-	private Object data; 
+	private Serializable data; 
 	private Uri contentProviderUri; 
 	private String broadcastNotification; 
 	
@@ -36,7 +40,7 @@ public class ServiceModel implements Serializable{
 		this.broadcastNotification = broadcastNotification; 
 	}
 	
-	public ServiceModel(URI uri, HttpType httpType, ServiceDataFormat dataformat, Object obj) {
+	public ServiceModel(URI uri, HttpType httpType, ServiceDataFormat dataformat, Serializable obj) {
 		super(); 
 		this.uri = uri; 
 		this.httpType = httpType; 
@@ -72,11 +76,11 @@ public class ServiceModel implements Serializable{
 		this.returnType = returnType;
 	}
 	
-	public Object getData() {
+	public Serializable getData() {
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(Serializable data) {
 		this.data = data;
 	}
 

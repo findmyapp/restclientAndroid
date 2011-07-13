@@ -29,7 +29,7 @@ public class RestIntentService extends IntentService {
 
     public RestIntentService() {
         super("RestIntentService");
-        _restProcessor = new RestProcessor(this.getApplicationContext());
+        _restProcessor = new RestProcessor(this);
     }
 
 	@Override
