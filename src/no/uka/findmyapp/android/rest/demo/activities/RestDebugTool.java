@@ -1,6 +1,7 @@
 
 package no.uka.findmyapp.android.rest.demo.activities;
 
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -9,6 +10,7 @@ import no.uka.findmyapp.android.rest.R;
 import no.uka.findmyapp.android.rest.library.HttpType;
 import no.uka.findmyapp.android.rest.library.ServiceDataFormat;
 import no.uka.findmyapp.android.rest.library.data.model.ServiceModel;
+import no.uka.findmyapp.android.rest.library.data.model.Temperature;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,11 +64,14 @@ public class RestDebugTool extends Activity implements OnClickListener{
 		
 		Log.i("BroadcastIntentDebug", "Creating Servicemodel");
 		try {
+			
+			
 			serviceModel = new ServiceModel(
 					new URI(urlForm.getText().toString() + parameterForm.getText().toString()),
-					this.getType((String) chosenMethod.getSelectedItem()), 
-					ServiceDataFormat.JSON, null);
+					HttpType.GET, 
+					ServiceDataFormat.JSON, new TypeToken<Temperature>(){}.getType(),  RestDebugTool.BROADCAST_INTENT_TOKEN);
 			
+			//RestDebugTool.BROADCAST_INTENT_TOKEN
 			Intent i = new Intent(this, DebugResult.class);
 			Log.d("BroadcastIntentDebug", "Adding service to intent bundle");
 			

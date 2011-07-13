@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -71,6 +72,7 @@ public class RestProcessor {
 	}
 	
 	private void sendIntentBroadcast(String intentString, Object obj) {
+		Log.v("RestProcessor", "sending broadcast");
 		Intent broadcastedIntent = new Intent(); 
 		broadcastedIntent.putExtra("return", (Serializable) obj);
 		broadcastedIntent.setAction(intentString);
