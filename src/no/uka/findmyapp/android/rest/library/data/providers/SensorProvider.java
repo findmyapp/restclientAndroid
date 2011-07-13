@@ -1,3 +1,9 @@
+/*
+* Copyright (c) 2011 Accenture
+* Licensed under the MIT open source license	
+* http://www.opensource.org/licenses/mit-license.php
+*/
+
 package no.uka.findmyapp.android.rest.library.data.providers;
 
 import java.util.HashMap;
@@ -14,45 +20,43 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+/**
+ * A sensor content provider which provides access 
+ * to sensor sample value database. This sensor database
+ * contains temperature, noise, humdity and beertap samples.
+ */
 public class SensorProvider extends ContentProvider{
 	private TemperatureDbHelper dbHelper; 
-	
 	private static final int TEMPERATURE = 1; 
-	private static final int HUMIDITY = 2; 
-	private static final int NOISE = 3; 
-	private static final int BEERTAP = 4; 
-	
-	// Temperature metadata
-	public static final String AUTHORITY = "no.uka.findmyapp.SensorProvider"; 
-	public static final Uri CONTENT_PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/sensor");
-	public static final String DATABASE_NAME = "sensor.db";
-	public static final int DATABASE_VERSION = 1; 
 
-	/* content type/mime for one item: 
-	 * vnd.android.cursor.item/vnd.your-domain.your-item-name
-	 * http://markmail.org/message/4qto6tizez2pyp4v
-	 */
-	public static final String CONTENT_TYPE_SENSOR_ITEM = "vnd.android.cursor.dir/vnd.uka.sensor"; 
+	// Temperature metadata
+	public static final String AUTHORITY = "no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider"; 
+	public static final Uri CONTENT_PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/temperature");
+	public static final String DATABASE_NAME = "temperature.db";
+	public static final int DATABASE_VERSION = 1; 
+	//TODO implement article MIME
+	//content type for one item: vnd.android.cursor.item/vnd.your-domain.your-item-name
+	public static final String CONTENT_TYPE_TEMPERATURE_ITEM = "vnd.android.cursor.dir/vnd.uka.temperature"; 
 	// End of metadata
 	
 	private static final UriMatcher uriMatcher; 
 	
-	private static final HashMap<String, String> simpleSensorProjectionMap; 
+	private static final HashMap<String, String> temperatureProjectionMap; 
 	static {
 		uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 		uriMatcher.addURI(SensorProvider.AUTHORITY, SensorProvider.TemperatureTable.TABLE_NAME, TEMPERATURE);
 		
-		simpleSensorProjectionMap = new HashMap<String, String>(); 
-		simpleSensorProjectionMap.put(
+		temperatureProjectionMap = new HashMap<String, String>(); 
+		temperatureProjectionMap.put(
 			SensorProvider.TemperatureTable.ID, SensorProvider.TemperatureTable.ID
 		);
-		simpleSensorProjectionMap.put(
+		temperatureProjectionMap.put(
 			SensorProvider.TemperatureTable.LOCATION_ID, SensorProvider.TemperatureTable.LOCATION_ID
 		);
-		simpleSensorProjectionMap.put(
+		temperatureProjectionMap.put(
 			SensorProvider.TemperatureTable.VALUE, SensorProvider.TemperatureTable.VALUE
 		);
-		simpleSensorProjectionMap.put(
+		temperatureProjectionMap.put(
 			SensorProvider.TemperatureTable.DATE, SensorProvider.TemperatureTable.DATE
 		);
 		
@@ -60,7 +64,7 @@ public class SensorProvider extends ContentProvider{
 	
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		SQLiteDatabase db = dbHelper.getWritableDatabase(); 
 		
 		int count = 0; 
 		switch (uriMatcher.match(uri)) {
@@ -82,7 +86,7 @@ public class SensorProvider extends ContentProvider{
 		switch (uriMatcher.match(uri)) {
 		case TEMPERATURE:
 			Log.v("DEBUG", "INSIDE");
-			return SensorProvider.CONTENT_TYPE_SENSOR_ITEM;
+			return SensorProvider.CONTENT_TYPE_TEMPERATURE_ITEM;
 		default:
 			Log.v("DEBUG", "DEFAULT");
 			throw new IllegalArgumentException("Unknown URI " + uri);
@@ -145,7 +149,7 @@ public class SensorProvider extends ContentProvider{
         switch (uriMatcher.match(uri)) {
             case TEMPERATURE:
                 qb.setTables(SensorProvider.TemperatureTable.TABLE_NAME);
-                qb.setProjectionMap(simpleSensorProjectionMap);
+                qb.setProjectionMap(temperatureProjectionMap);
                 break;
 
             default:
