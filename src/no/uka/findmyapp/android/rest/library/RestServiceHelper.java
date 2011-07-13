@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 
 import no.uka.findmyapp.android.rest.library.data.model.ServiceModel;
 import no.uka.findmyapp.android.rest.library.data.model.Temperature;
-import no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider;
+import no.uka.findmyapp.android.rest.library.data.providers.SensorProvider;
 import android.content.Context;
 import android.content.Intent;
 
@@ -68,7 +68,7 @@ public class RestServiceHelper {
 								HttpType.GET, 
 								ServiceDataFormat.JSON,
 								typeToken, 
-								TemperatureProvider.CONTENT_PROVIDER_URI);
+								SensorProvider.CONTENT_PROVIDER_URI);
 						
 					} catch (URISyntaxException e) {
 						// TODO Auto-generated catch block

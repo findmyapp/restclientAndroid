@@ -22,7 +22,7 @@
 		<service android:name=".library.RestIntentService"/>
 		
 		<provider
-			android:name=".library.data.providers.TemperatureProvider" 
+			android:name=".library.data.providers.SensorProvider" 
 			android:authorities="no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider" />
     </application>
 </manifest>

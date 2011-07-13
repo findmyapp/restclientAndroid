@@ -1,6 +1,6 @@
 package no.uka.findmyapp.android.rest.library.data.helpers;
 
-import no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider;
+import no.uka.findmyapp.android.rest.library.data.providers.SensorProvider;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,22 +10,21 @@ public class TemperatureDbHelper extends SQLiteOpenHelper{
 
 	private static SQLiteDatabase db;
 	private Context appContext;
-	SQLiteDatabase dbReadable;
+	private SQLiteDatabase dbReadable;
+	private SQLiteDatabase dbWriteable;
 
-	SQLiteDatabase dbWriteable;
 
-
-	private static final String CREATE_TABLE_QUERY = "CREATE TABLE " + TemperatureProvider.TemperatureTable.TABLE_NAME + " (" 
-													+ TemperatureProvider.TemperatureTable.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-													+ TemperatureProvider.TemperatureTable.LOCATION_ID + " INTEGER, " 
-													+ TemperatureProvider.TemperatureTable.VALUE + " DECIMAL,"
-													+ TemperatureProvider.TemperatureTable.DATE + " DATETIME);";
+	private static final String CREATE_TABLE_QUERY = "CREATE TABLE " + SensorProvider.TemperatureTable.TABLE_NAME + " (" 
+													+ SensorProvider.TemperatureTable.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+													+ SensorProvider.TemperatureTable.LOCATION_ID + " INTEGER, " 
+													+ SensorProvider.TemperatureTable.VALUE + " DECIMAL,"
+													+ SensorProvider.TemperatureTable.DATE + " DATETIME);";
 	
-	private static final String DROP_TABLE_QUERY = "DROP TABLE " + TemperatureProvider.TemperatureTable.TABLE_NAME + ";";
+	private static final String DROP_TABLE_QUERY = "DROP TABLE " + SensorProvider.TemperatureTable.TABLE_NAME + ";";
 
 	
 	public TemperatureDbHelper(Context context) {
-		super(context, TemperatureProvider.DATABASE_NAME, null, TemperatureProvider.DATABASE_VERSION);
+		super(context, SensorProvider.DATABASE_NAME, null, SensorProvider.DATABASE_VERSION);
 		appContext = context;
 
 		//dbReadable = this.getReadableDatabase();
@@ -34,9 +33,9 @@ public class TemperatureDbHelper extends SQLiteOpenHelper{
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		Log.v("AAAAAAAAAAAAAAA", "CREATING TABLE " + db);
-		Log.v("INFO", "CREATING TABLE " + db);
-		Log.v("INFO", CREATE_TABLE_QUERY);
+		Log.d("INFO", "CREATING TABLE " + db);
+		Log.d("INFO", "CREATING TABLE " + db);
+		Log.d("INFO", CREATE_TABLE_QUERY);
 		db.execSQL(CREATE_TABLE_QUERY);
 	}
 
