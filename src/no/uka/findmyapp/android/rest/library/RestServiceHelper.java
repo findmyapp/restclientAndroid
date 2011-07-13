@@ -56,19 +56,15 @@ public class RestServiceHelper {
 	
 	public class ServiceReferenceFactory {
 		public ServiceModel getService(Services service) {
+			/*
 			switch(service) {
 				case TEMP :
 					try {
 						Type typeToken = new TypeToken<Temperature>(){}.getType();
 
 						String uri = ServicesConstants.SERVICE1_URI; 
-						
-						return new ServiceModel(
-								new URI(String.format(ServicesConstants.SERVICE1_URI, "1")), 
-								HttpType.GET, 
-								ServiceDataFormat.JSON,
-								typeToken, 
-								SensorProvider.CONTENT_PROVIDER_URI);
+				
+						return new ServiceModel();
 						
 					} catch (URISyntaxException e) {
 						// TODO Auto-generated catch block
@@ -78,7 +74,9 @@ public class RestServiceHelper {
 				case XX :
 					break;
 			}
+			*/
 			return null;
+			
 		}
 	}
 

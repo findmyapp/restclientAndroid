@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,13 +51,13 @@ public class RestProcessor {
 		}
 	}
 	
-	private Object executeAndParse(ServiceModel serviceModel) {
+	private Serializable executeAndParse(ServiceModel serviceModel) {
 		restMethod.setUri(serviceModel.getUri());
 		String response = "";
 		try {
 			response = restMethod.get(serviceModel.getDataformat());
 			
-			return (Object)gson.fromJson(response, serviceModel.getReturnType());
+			return (Serializable)gson.fromJson(response, serviceModel.getReturnType());
 		} catch (Exception e) {
 			// TODO Fix return
 			e.printStackTrace();
@@ -70,7 +71,8 @@ public class RestProcessor {
 		
 	}
 	
-	private void sendIntentBroadcast(String intentString, Object obj) {
+	private void sendIntentBroadcast(String intentString, Serializable obj) {
+		Log.v("RestProcessor", "sending broadcast");
 		Intent broadcastedIntent = new Intent(); 
 		broadcastedIntent.putExtra("return", (Serializable) obj);
 		broadcastedIntent.setAction(intentString);

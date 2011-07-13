@@ -1,5 +1,6 @@
 package no.uka.findmyapp.android.rest.demo.activities;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -11,16 +12,19 @@ import no.uka.findmyapp.android.rest.demo.activities.TemperatureDemo.StringsCont
 import no.uka.findmyapp.android.rest.library.HttpType;
 import no.uka.findmyapp.android.rest.library.RestServiceHelper;
 import no.uka.findmyapp.android.rest.library.data.model.ServiceModel;
+import no.uka.findmyapp.android.rest.library.data.model.Temperature;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
 
 public class DebugResult extends Activity {
+	
 	private static RestServiceHelper serviceHelper = RestServiceHelper.getInstance(); 
 	private StringsContentObserver stringsObserver = null;
 	private Handler handler = new Handler();
@@ -35,6 +39,7 @@ public class DebugResult extends Activity {
 		try {
 			Log.d("BroadcastIntentDebug", "DebugResult activity started, inflating serviceModel");
 			serviceModel = (ServiceModel) getIntent().getSerializableExtra("request");
+			Log.d("BroadcastIntentDebug", serviceModel.toString());
 		} catch (Exception e) {
 			Log.w("BroadcastIntentDebug", e.getMessage());
 		}
@@ -44,16 +49,12 @@ public class DebugResult extends Activity {
 	}
 	
 	private void execute(ServiceModel sm) {
-		Type t = new Type(){}.getClass(); 
-		try {
-			ServiceModel s = new ServiceModel(new URI("http://findmyapp.net/findmyapp/auth?accessToken=asdfd"), HttpType.GET, t, RestDebugTool.BROADCAST_INTENT_TOKEN);
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			TextView tv = (TextView) findViewById(R.id.debugResult);
-			tv.setText(e.toString()); 
-		}
 		
 		setHeadText(sm);
+		ReciveIntent intentReceiver = new ReciveIntent();
+		IntentFilter intentFilter = new IntentFilter(RestDebugTool.BROADCAST_INTENT_TOKEN);
+
+		registerReceiver(intentReceiver, intentFilter); 
 		serviceHelper.startServiceTest(this, sm); 
 	}
 	
@@ -75,15 +76,17 @@ public class DebugResult extends Activity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+
+			Log.w("BroadcastIntentDebug", "---------");
 			TextView tv = (TextView) findViewById(R.id.debugResult);
 			Gson gson = new Gson(); 
 			if (intent.getAction().equals(RestDebugTool.BROADCAST_INTENT_TOKEN)) {
-				Object obj = intent.getSerializableExtra("request");
-				gson.toJson(obj);
+				Serializable obj = intent.getSerializableExtra("return");
+				//gson.toJson(obj);
+				Temperature t = (Temperature) obj;
 				
-				tv.setText(gson.toString()); 
+				tv.setText(t.toString()); 
 			}
 		}
-		
 	}
 }
