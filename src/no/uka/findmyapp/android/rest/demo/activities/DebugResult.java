@@ -20,7 +20,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
 
-public class DebugResult extends Activity{
+public class DebugResult extends Activity {
 	private static RestServiceHelper serviceHelper = RestServiceHelper.getInstance(); 
 	private StringsContentObserver stringsObserver = null;
 	private Handler handler = new Handler();
