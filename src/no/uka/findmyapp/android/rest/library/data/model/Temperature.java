@@ -32,6 +32,13 @@ public class Temperature implements Serializable
 	public void setValue(float value) {
 		this.value = value;
 	}
+	@Override
+	public String toString() {
+		return "Temperature [id=" + id + ", locationId=" + locationId
+				+ ", value=" + value + "]";
+	}
+	
+	
 	/*
 	public Date getDate() {
 		return date;

@@ -1,5 +1,6 @@
 package no.uka.findmyapp.android.rest.demo.activities;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -11,6 +12,7 @@ import no.uka.findmyapp.android.rest.demo.activities.TemperatureDemo.StringsCont
 import no.uka.findmyapp.android.rest.library.HttpType;
 import no.uka.findmyapp.android.rest.library.RestServiceHelper;
 import no.uka.findmyapp.android.rest.library.data.model.ServiceModel;
+import no.uka.findmyapp.android.rest.library.data.model.Temperature;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -79,9 +81,11 @@ public class DebugResult extends Activity {
 			TextView tv = (TextView) findViewById(R.id.debugResult);
 			Gson gson = new Gson(); 
 			if (intent.getAction().equals(RestDebugTool.BROADCAST_INTENT_TOKEN)) {
-				Object obj = intent.getSerializableExtra("request");
-				gson.toJson(obj);
-				tv.setText(gson.toString()); 
+				Serializable obj = intent.getSerializableExtra("return");
+				//gson.toJson(obj);
+				Temperature t = (Temperature) obj;
+				
+				tv.setText(t.toString()); 
 			}
 		}
 	}
