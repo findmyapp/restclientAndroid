@@ -32,12 +32,11 @@ public class RestProcessor {
 	public void callRest(ServiceModel serviceModel) {
 		switch(serviceModel.getHttpType()) {
 			case GET :
-				if(serviceModel.getBroadcastNotification() != null) {
+				if(serviceModel.getBroadcastNotification() != null) 
 					this.sendIntentBroadcast(serviceModel.getBroadcastNotification(), this.executeAndParse(serviceModel));
-				}
-				else {
+				else 
 					this.sendToContentProvider(serviceModel.getContentProviderUri(), this.executeAndParse(serviceModel));
-				}
+				
 			break;
 			case POST :
 				//TODO

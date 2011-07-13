@@ -26,7 +26,9 @@ import android.widget.Toast;
 import com.google.gson.reflect.TypeToken;
 
 public class RestDebugTool extends Activity implements OnClickListener{
-	private ServiceModel serviceModel; 
+	private ServiceModel serviceModel;
+	
+	public static final String BROADCAST_INTENT_TOKEN = "restdebugtool.broadcast.token";
 	
 	/** Called when the activity is first created. */
     @Override
@@ -58,6 +60,7 @@ public class RestDebugTool extends Activity implements OnClickListener{
 		//Spinner chosenDataFormat = (Spinner) findViewById(R.id.chooseFormat);
 		Spinner chosenMethod = (Spinner) findViewById(R.id.chooseAction);
 		
+		Log.i("BroadcastIntentDebug", "Creating Servicemodel");
 		try {
 			serviceModel = new ServiceModel(
 					new URI(urlForm.getText().toString() + parameterForm.getText().toString()),
@@ -66,7 +69,10 @@ public class RestDebugTool extends Activity implements OnClickListener{
 					new TypeToken<List<Object>>(){}.getType());
 			
 			Intent i = new Intent(this, DebugResult.class);
+			
+			Log.d("BroadcastIntentDebug", "Adding service to intent bundle");
 			i.putExtra("request", serviceModel);
+			Log.d("BroadcastIntentDebug", "Starting DebugResult activity");
 			startActivity(i);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
@@ -94,6 +100,21 @@ public class RestDebugTool extends Activity implements OnClickListener{
 	    public void onNothingSelected(AdapterView parent) {
 	      // Do nothing.
 	    }
+	}
+	
+	public enum Storage {
+		INTENT("BroadcastIntent"),
+		T_PROVIDER("TemperatureProvider");
+	
+		String value;
+		
+		private Storage(String value) {
+			this.value = value;
+		}
+		
+		public String getValue() {
+			return value;
+		}
 	}
 }
 

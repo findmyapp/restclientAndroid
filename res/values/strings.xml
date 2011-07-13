@@ -16,9 +16,10 @@
     <string name="rest_service_label">RestService_label</string>
     <string name="chooseDataFormat">Choose datatype</string>
     <string-array name="expectedDataFormat">
-        <item>json</item>
+        <item>BroadcastIntent</item>
+        <item>TemperatureProvider</item>
     </string-array>
-    <string name="chooseAction">Choose action</string>
+    <string name="chooseAction">Save method</string>
     <string-array name="action">
         <item>GET</item>
         <item>PUT</item>

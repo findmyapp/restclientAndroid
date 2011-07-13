@@ -2,13 +2,11 @@ package no.uka.findmyapp.android.rest.demo.activities;
 
 import java.util.ArrayList;
 
-
 import no.uka.findmyapp.android.rest.R;
 import no.uka.findmyapp.android.rest.demo.adapters.BarAdapter;
 import no.uka.findmyapp.android.rest.demo.listeners.ShakeEventListener;
 import no.uka.findmyapp.android.rest.library.RestServiceHelper;
-import no.uka.findmyapp.android.rest.library.data.model.TemperatureMetaData;
-import no.uka.findmyapp.android.rest.library.RestServiceHelper.ServiceReferenceFactory; 
+import no.uka.findmyapp.android.rest.library.data.providers.TemperatureProvider;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -48,7 +46,7 @@ public class TemperatureDemo extends Activity implements OnClickListener {
         
         ContentResolver cr = getContentResolver();
         stringsObserver = new StringsContentObserver( handler );
-        cr.registerContentObserver(TemperatureMetaData.CONTENT_PROVIDER_URI, true,
+        cr.registerContentObserver(TemperatureProvider.CONTENT_PROVIDER_URI, true,
 				stringsObserver );
         
         mSensorListener = new ShakeEventListener();
@@ -81,7 +79,7 @@ public class TemperatureDemo extends Activity implements OnClickListener {
     }
     
     private void showBar() {
-    	Cursor cursor = getContentResolver().query(TemperatureMetaData.CONTENT_PROVIDER_URI,
+    	Cursor cursor = getContentResolver().query(TemperatureProvider.CONTENT_PROVIDER_URI,
     			new String[] { "value" }, null, null, "_id DESC");
     	
     	if (cursor != null && cursor.moveToFirst()) {
